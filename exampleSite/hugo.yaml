@@ -98,9 +98,10 @@ params:
 
 menus:
   # Site header menu
-  # - name: Get started
-  #   pageRef: /get-started/
-  #   weight: 1
+  main:
+  - name: Get started
+    pageRef: /get-started/
+    weight: 1
 
   # Footer links
   # footer:

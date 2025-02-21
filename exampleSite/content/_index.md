@@ -10,8 +10,4 @@ grid:
     links:
       - text: "Overview"
         url: "/security/"
-      - text: "SSO"
-        url: "/security/for-admins/single-sign-on/"
-      - text: "SCIM"
-        url: "/security/for-admins/provisioning/scim/"
 ---
