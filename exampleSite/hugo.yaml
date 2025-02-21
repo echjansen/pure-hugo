@@ -1,0 +1,138 @@
+title: Pure Docs
+baseURL: https://docs.echjansen.com
+refLinksErrorLevel: ERROR
+enableGitInfo: true
+disablePathToLower: true
+enableInlineShortcodes: true
+
+# Missing links are warnings, not errors
+refLinksErrorLevel: WARNING
+
+ignoreLogs:
+  - cascade-pattern-with-extension
+
+taxonomies:
+  tag: tags
+  language: languages
+
+markup:
+  tableOfContents:
+    startLevel: 2
+    endLevel: 3
+  goldmark:
+    extensions:
+      typographer: false
+    parser:
+      wrapStandAloneImageWithinParagraph: false
+      attribute:
+        # Allow setting attributes on block-level elements
+        block: true
+    renderer:
+      # Allow inline HTML
+      unsafe: true
+  highlight:
+    # Use custom CSS for syntax highlighting
+    noClasses: false
+
+build:
+  # Generate hugo_stats.json - Tailwind uses this to detect classes
+  writeStats: true
+  buildStats:
+    enable: true
+    disableIDs: true
+    disableTags: true
+  cachebusters:
+    - source: assets/watching/hugo_stats\.json
+      target: styles\.css
+    - source: (postcss|tailwind)\.config\.js
+      target: css
+    - source: assets/.*\.js
+      target: js
+    - source: (assets|layouts)/.*\.(.*)$
+      target: "$2"
+
+
+# Additional output formats (e.g. custom JSON files)
+outputFormats:
+  # File containing all redirects, see: layouts/index.redirects.json
+  redirects:
+    baseName: redirects
+    isPlainText: true
+    mediaType: "application/json"
+    notAlternative: true
+  # Metadata file used by DD global search, see: layouts/index.metadata.json
+  metadata:
+    baseName: metadata
+    isPlainText: true
+    mediaType: "application/json"
+    notAlternative: true
+  # robots.txt, see: layouts/index.robots.json
+  robots:
+    baseName: robots
+    isPlainText: true
+    mediaType: "text/plain"
+    notAlternative: true
+
+# Enable custom output formats for the home page only
+# (only generate the custom output files once)
+outputs:
+  home:
+    - html
+    - redirects
+    - metadata
+    - robots
+
+languages:
+  en:
+    languageName: English
+
+# Site-wide parameters
+# Can be accessed in content with {{% param "param_name" %}}
+# Or in layouts/partials with site.Params.param_name
+params:
+  # analytics:
+  #   google: 111-2222222
+
+  # Docs repository URL
+  repo: https://github.com/echjansen/pure-hugo
+
+menus:
+  # Site header menu
+  # - name: Get started
+  #   pageRef: /get-started/
+  #   weight: 1
+
+  # Footer links
+  # footer:
+  #   - url: https://www.pure.com/products
+  #     name: Pure Product offerings
+
+# Hugo modules - for fetching docs from upstream repos
+# Versions are declared in go.mod
+module:
+  hugoVersion:
+    extended: false
+    min: "0.141.0"
+  mounts:
+    # Mount the assets directory so it doesn't get overwritten
+    - source: assets
+      target: assets
+    # Mount hugo_stats.json to the assets dir to trigger cachebust
+    - source: hugo_stats.json
+      target: assets/watching/hugo_stats.json
+    # Mount the icon files to assets so we can access them with resources.Get
+    - source: node_modules/@material-symbols/svg-400/rounded
+      target: assets/icons
+
+  imports:
+    - path: github.com/echjansen/pure-hugo
+      disable: false
+      ignoreConfig: true        # Include (true) / exclude contribution
+      ignoreImports: true
+
+
+    # Pure docs
+    # - path: github.com/pure/docs
+    #   mounts:
+    #     - source: docs/api/v1.1.md
+    #       target: content/pure/docs/version/v1.24.md

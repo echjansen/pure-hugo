@@ -1,0 +1,19 @@
+<div class="flex justify-center py-20 px-4 bg-gray-light-100 dark:bg-gray-dark-200">
+  <div class="flex w-full max-w-[840px] flex-col gap-10">
+      <div class="flex flex-col md:flex-row gap-4 items-center justify-evenly">
+          <a class="underline-offset-2 hover:underline" href="https://link">Pure Link</a>
+      {{- with .GetPage "/contribute" }}
+        <a class="underline-offset-2 hover:underline" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+      {{- end }}
+    </div>
+    <hr class="text-divider-light dark:text-divider-dark" />
+    <div class="grid lg:grid-cols-3 place-items-center gap-8 grid-cols-1">
+      <p class="text-sm">
+        Copyright © 2024-{{ time.Now.Year}} Pure Hugo. All rights reserved.
+      </p>
+      <div class="flex gap-4">
+        Pure Multi Media
+      </div>
+    </div>
+  </div>
+</div>

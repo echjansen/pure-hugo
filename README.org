@@ -1,0 +1,12 @@
+* Pure Hugo Theme
+A complete Hugo theme.
+
+** Getting started
+To trial the theme clone the website to your local drive, and run the provided exampleSite.
+
+#+begin_src shell
+  git clone https://github.com/echjansen/pure-hugo
+  cd pure-hugo/exampleSite
+  npm install
+  hugo serve
+#+end_src

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  {{ partial "head.html" . }}
+</head>
+
+<body class="flex h-max flex-col bg-background-light text-base dark:bg-background-dark dark:text-white">
+  <div class="absolute -z-10 w-full">
+    <svg class="dark:hidden" viewBox="0 0 1616 797" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1066.69 797L0 136.789V0H1616V488.038L1066.69 797Z" fill="#EFEFF2" />
+    </svg>
+    <svg class="hidden dark:block" viewBox="0 0 1616 797" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1066.69 797L0 136.789V0H1616V488.038L1066.69 797Z" fill="#080B0E" fill-opacity="0.3" />
+    </svg>
+  </div>
+  {{ partial "header.html" . }}
+  <main class="flex min-h-screen w-full flex-col items-stretch self-center">
+    <div class="flex xl:w-[1200px] flex-col items-stretch gap-20 self-center py-20 w-full px-4">
+      <div class="bg-pattern-blue relative overflow-hidden rounded drop-shadow">
+        <div class="flex h-full flex-col items-start justify-between gap-4 p-8">
+          <div class="flex items-center gap-6">
+            <span class="icon-svg text-violet-light dark:text-violet-dark">
+              {{ partial "icon" "play_circle" }}</span>
+            <h1 class="text-2xl">Get the Pure Hugo theme</h1>
+          </div>
+          <p>
+            Learn how to install Pure Hugo for your website.
+          </p>
+          <a href="/get-started/pure-hugo/"
+            class="mt-20 flex cursor-pointer items-center gap-2 rounded bg-blue-light p-2 px-4 text-white transition duration-300 hover:bg-blue-light-400 dark:bg-blue-dark-400 dark:hover:bg-blue-dark">
+            <span class="icon-svg">{{ partial "icon" "download"}}</span>
+            Get Pure-Hugo theme
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-4">
+
+          <div>
+            <a class="h-full" href="/get-started/">
+              <div
+                class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
+                <div class="flex items-center gap-4">
+                  <span class="icon-svg text-violet-light dark:text-violet-dark">
+                    {{ partial "icon" "rocket" }}
+                  </span>
+                  <div>
+                    <div class="text-xl leading-snug text-gray-light-800 dark:text-white">
+                      Get started
+                    </div>
+                  </div>
+                </div>
+                <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
+                  Learn how to get started with the pure-hugo theme.
+                </div>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div>
+        <h2 class="mb-4 text-xl">Browse by section</h2>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {{ range .Params.grid }}
+          <div>
+            <div
+              class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm dark:border-gray-dark-400 dark:bg-gray-dark-200">
+              <div class="flex items-center gap-4">
+                <span class="icon-svg text-gray-light dark:text-gray-dark">{{ partial "icon" .icon }}</span>
+                <div>
+                  <div class="text-xl">{{ .title }}</div>
+                </div>
+              </div>
+              <div class="flex h-full flex-col justify-between gap-4">
+                <p>{{ .description | markdownify }}</p>
+                <nav class="flex flex-col gap-2">
+                  {{ range .links }}
+                  <div>
+                    <span class="icon-svg text-gray-light dark:text-gray-dark">{{ partial "icon" "arrow_right" }}</span>
+                    <a class="link" href="{{ .url }}">{{ .text }}</a>
+                  </div>
+                  {{ end }}
+                </nav>
+              </div>
+            </div>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      <div class="flex flex-col gap-4">
+        <h2 class="mb-4 text-xl">Browse by tag</h2>
+        <div class="flex flex-wrap gap-4">
+          {{ $tags := slice }}
+          {{- range site.Taxonomies.tags }}
+            {{ $tags = $tags | append .Page }}
+          {{ end }}
+          {{ partial "tags.html" $tags }}
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <footer>{{ partialCached "footer.html" . }}</footer>
+</body>
+
+</html>
