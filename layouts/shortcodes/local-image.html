@@ -1,9 +1,7 @@
 {{ $filename := .Get "src" }}
-{{ $image := resources.Get (printf "images/%s" $filename) }}
-{{ if $image }}
+{{ if $filename }}
 <img
-    src="{{ $image.RelPermalink }}"
-    alt="{{ $filename }}"
+    src="{{ $filename }}"
     loading="lazy"
     class="inline my-0"
 />
