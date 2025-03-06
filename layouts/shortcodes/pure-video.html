@@ -1,0 +1,8 @@
+{{- $video := resources.Get (.Page.Params.video) }}
+{{ if $video }}
+<video controls autoplay class="inline my-0">
+    <source src="{{ $video.Permalink }}">
+</video>
+{{ else }}
+  <p>Video not found: {{ $video }}</p>
+{{ end }}

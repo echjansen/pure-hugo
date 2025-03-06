@@ -1,0 +1,3 @@
+{{- $img := resources.Get (.Page.Params.image | default "/images/thumbnail.webp") }}
+{{- $img = $img.Process "resize 600x" }}
+<img class="w-full object-cover shadow" src="{{ $img.Permalink }}">
