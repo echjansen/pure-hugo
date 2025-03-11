@@ -16,7 +16,7 @@
   <ol>
     {{- range $i, $e := .Pages }}
     <li>
-      <a class="link" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+      <a class="link" href="{{ .Permalink }}">{{ .Title }}</a>
       <p>{{ plainify .Description }}</p>
     </li>
     {{- end }}
